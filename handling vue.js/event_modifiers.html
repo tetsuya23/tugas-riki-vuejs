@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="greet">Greet</button>
+      <a @click.stop="doThis">Do This</a>
+      <form @submit.prevent="onSubmit">
+        <input type="submit" value="Submit">
+      </form>
+      <a @click.stop.prevent="doThat">Do That</a>
+      <form @submit.prevent>
+        <input type="submit" value="Submit">
+      </form>
+      <div @click.self="doThat">
+        Click me
+        <span>I'm a child</span>
+      </div>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: function() {
+          return {
+            name: 'Vue.js'
+          }
+        },
+        methods: {
+          greet(event) {
+            // `this` inside methods points to the current active instance
+            alert(`Hello ${this.name}!`)
+            // `event` is the native DOM event
+            if (event) {
+              alert(event.target.tagName)
+            }
+          },
+          doThis() {
+            alert('Doing this...')
+          },
+          onSubmit() {
+            alert('Form submitted!')
+          },
+          doThat() {
+            alert('Doing that...')
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
